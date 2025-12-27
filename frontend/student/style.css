@@ -1,0 +1,214 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* BODY */
+body {
+  background: linear-gradient(135deg, #f9c5d1, #c9d6ff);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+  padding: 20px;
+}
+
+/* FLOATING BOXES */
+.color-box {
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  opacity: 0.25;
+  border-radius: 30px;
+}
+
+.pink {
+  background: #ff9a9e;
+  top: 8%;
+  left: 5%;
+}
+
+.blue {
+  background: #8ec5fc;
+  bottom: 8%;
+  right: 5%;
+}
+
+/* LOGIN */
+.loginbox {
+  background: white;
+  width: 100%;
+  max-width: 360px;
+  padding: 30px;
+  border-radius: 22px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+}
+
+.loginbox h2 {
+  color: #5a4fcf;
+  margin-bottom: 8px;
+}
+
+.loginbox p {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.loginbox input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.loginbox button {
+  width: 100%;
+  padding: 12px;
+  background: #5a4fcf;
+  color: white;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.switchtext {
+  margin-top: 15px;
+  color: #5a4fcf;
+  cursor: pointer;
+}
+
+/* DASHBOARD */
+.dashboard {
+  width: 100%;
+  max-width: 900px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 25px;
+  padding: 25px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+}
+
+.hidden {
+  display: none;
+}
+
+/* HEADER */
+header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+header h1 {
+  color: #5a4fcf;
+  font-size: clamp(22px, 4vw, 32px);
+}
+
+header p {
+  color: #777;
+  font-size: 14px;
+}
+
+/* CARD */
+.card {
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* MOODS */
+.moods {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.moods span {
+  font-size: 32px;
+  margin: 8px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.moods span:hover {
+  transform: scale(1.2);
+}
+
+/* CHAT */
+.chatbox {
+  height: 160px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.chat {
+  display: flex;
+  flex-direction: column;
+}
+
+.chat input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+.chat button {
+  width: 100%;
+  padding: 10px;
+  background: #5a4fcf;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+}
+
+/* CALENDAR */
+.calendar {
+  height: 90px;
+  background: linear-gradient(90deg, #c9d6ff, #e2ebf0);
+  border-radius: 14px;
+}
+
+/* TABLET */
+@media (min-width: 768px) {
+  .chat {
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .chat input {
+    width: 75%;
+    margin-bottom: 0;
+  }
+
+  .chat button {
+    width: 25%;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 480px) {
+  .color-box {
+    display: none;
+  }
+
+  .loginbox,
+  .dashboard {
+    padding: 20px;
+  }
+}
