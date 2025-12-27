@@ -1,5 +1,69 @@
-<htm>
-    <body>
-        <h1>MindBridge</h1>
-    </body>
-</htm>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MindBridge</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Floating background boxes -->
+  <div class="color-box pink"></div>
+  <div class="color-box blue"></div>
+
+  <!-- LOGIN CARD -->
+  <div class="loginbox" id="loginBox">
+    <h2 id="loginTitle">Pause. Breathe. Begin</h2>
+    <p id="loginText">This space is just for you</p>
+
+    <input type="text" id="studentName" placeholder="Your name">
+    <input type="email" id="email" placeholder="College email">
+    <input type="password" id="password" placeholder="Create password">
+
+    <button onclick="enterApp()">Enter MindBridge</button>
+
+    <p class="switchtext" onclick="changeLoginScreen()">
+      Already inside? Switch mode
+    </p>
+  </div>
+
+  <!-- MAIN DASHBOARD -->
+  <div class="dashboard hidden" id="dashboard">
+
+    <header>
+      <h1>MindBridge</h1>
+      <p>A place where you can speak to yourself</p>
+    </header>
+
+    <!-- MOOD SECTION -->
+    <section class="card">
+      <h3>How are you feeling today?</h3>
+      <div class="moods">
+        <span onclick="selectMood('😊','happy')">😊</span>
+        <span onclick="selectMood('😐','okay')">😐</span>
+        <span onclick="selectMood('😔','sad')">😔</span>
+        <span onclick="selectMood('😠','angry')">😠</span>
+        <span onclick="selectMood('🤯','stressed')">🤯</span>
+      </div>
+      <p id="moodResult"></p>
+    </section>
+
+    <!-- CHATBOT -->
+    <section class="card chat">
+      <h3>Your Safe Chat</h3>
+      <div class="chatbox" id="chatBox"></div>
+      <input type="text" id="textInput" placeholder="say it here… no judgment">
+      <button onclick="sendMessage()">Send</button>
+    </section>
+
+    <!-- MOOD CALENDAR -->
+    <section class="card">
+      <h3>Mood Calendar</h3>
+      <div class="calendar" id="calendar"></div>
+    </section>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
