@@ -35,7 +35,7 @@ def chat(req:func.HttpRequest):
                }
             ]
         )
-        reply=response.output_text()
+        reply=response.output_text
         return func.HttpResponse(
             json.dumps({
                 "reply":reply
@@ -44,9 +44,10 @@ def chat(req:func.HttpRequest):
             mimetype="application/json"
         )
     except Exception as e:
+        logging.error(str(e))
         return func.HttpResponse(
             json.dumps({
-               logging.error(str(e))
+               "error":"Internal server error"
             }),
             status_code=500,
             mimetype="application/json"
