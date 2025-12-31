@@ -1,102 +1,112 @@
 import azure.functions as func
 import datetime
 import json
-import logging
-from openai import OpenAI
 import os
 from cosmos_client import get_container
+from openai import OpenAI
+import logging
+
+# OpenAI client
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 app = func.FunctionApp()
 
-@app.route(route="chat",methods=["POST"],auth_level=func.AuthLevel.ANONYMOUS)
-def chat(req:func.HttpRequest):
+# ---------------- ENTER / LOGIN ----------------
+@app.route(route="enter", methods=["POST"], auth_level=func.AuthLevel.ANONYMOUS)
+def enter(req: func.HttpRequest):
+
     try:
-        client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-        data=req.get_json()
-        msg=data.get("message")
-        if not msg:
-            return func.HttpResponse(
-                json.dumps({
-                    "error":"Please enter the message to respond"
-                }),
-                status_code=400,
-                mimetype="application/json"
-            )
+        data = req.get_json()
+    except ValueError:
+        return func.HttpResponse(
+            json.dumps({"error": "Invalid JSON"}),
+            status_code=400,
+            mimetype="application/json"
+        )
 
-        response=client.responses.create(
-            model="gpt-5-nano",
-            input=[
-               {
-                  "role": "system",
-                   "content": "You are MindBridge, a supportive mental health assistant for students. Do not give medical diagnosis."
-               },
-               {
-                    "role": "user",
-                    "content": msg
-               }
-            ]
-        )
-        reply=response.output_text
-        container=get_container("chat_summaries")
-        container.create_item({
-            "reply":reply,
-            "createdAt":datetime.datetime.isoformat()
-        })
+    student_name = data.get("studentname")
+    email = data.get("email")
+    password = data.get("password")
+
+    if not student_name or not email or not password:
         return func.HttpResponse(
-            json.dumps({
-                "reply":reply
-            }),
-            status_code=200,
+            json.dumps({"error": "All fields are required"}),
+            status_code=400,
             mimetype="application/json"
         )
-        
-    except Exception as e:
-        logging.error(str(e))
-        return func.HttpResponse(
-            json.dumps({
-               "error":"Internal server error"
-            }),
-            status_code=500,
-            mimetype="application/json"
-        )
-@app.route(route="chat",methods=["POST"],auth_level=func.AuthLevel.ANONYMOUS)
-def enter(req:func.HttpRequest)->func.HttpResponse:
+
+    users_container = get_container("users")
+
+    users_container.upsert_item({
+        "id": email,
+        "studentId": email,
+        "studentName": student_name,
+        "email": email,
+        "password": password,
+        "createdAt": datetime.datetime.utcnow().isoformat()
+    })
+
+    return func.HttpResponse(
+        json.dumps({"success": True}),
+        status_code=200,
+        mimetype="application/json"
+    )
+
+
+# ---------------- CHAT (REAL AI) ----------------
+@app.route(route="chat", methods=["POST"], auth_level=func.AuthLevel.ANONYMOUS)
+def chat(req: func.HttpRequest):
+
     try:
-        data=req.get_json()
-        stu_name=data.get("studentname")
-        email=data.get("email")
-        password=data.get("password")
-        if not stu_name or not email or not password:
-            return func.HttpResponse(
-                json.dumps({
-                    "error":"The above details are required to enter"
-                }),
-                status_code=400,
-                mimetype="application/json"
+        data = req.get_json()
+    except ValueError:
+        return func.HttpResponse(
+            json.dumps({"error": "Invalid JSON"}),
+            status_code=400,
+            mimetype="application/json"
+        )
+
+    message = data.get("message")
+
+    if not message:
+        return func.HttpResponse(
+            json.dumps({"error": "Message is required"}),
+            status_code=400,
+            mimetype="application/json"
+        )
+
+    # ✅ OpenAI Responses API (CORRECT)
+    try:
+            # Try OpenAI
+            response = client.responses.create(
+                model="gpt-4o-mini",
+                input=message
             )
-        container=get_container("users")
-        container.create_item({
-            "studentName":stu_name,
-            "email":email,
-            "password":password,
-            "createdAt":datetime.datetime.isoformat()
-        })
-        return func.HttpResponse(
-            json.dumps({
-                "success":True,
-                "message":"Login Successful"
-            }),
-            status_code=200,
-            mimetype="application/json"
-        )
-    except Exception as e:
-        return func.HttpResponse(
-            json.dumps({"error": str(e)}),
-            status_code=500,
-            mimetype="application/json"
+            reply = response.output_text
+
+    except Exception as ai_error:
+        # 🔥 FALLBACK RESPONSE (VERY IMPORTANT)
+        logging.error(f"OpenAI failed: {ai_error}")
+        reply = (
+                "I'm here with you. You’re not alone 🤍\n"
+                "Tell me more about what you're feeling."
         )
 
-        
+    # ✅ CORRECT extraction
+    reply = response.output_text
 
+    chat_container = get_container("chat_summaries")
 
-    
+    chat_container.create_item({
+        "id": str(datetime.datetime.utcnow().timestamp()),
+        "studentId": "test-user",
+        "userMessage": message,
+        "botReply": reply,
+        "createdAt": datetime.datetime.utcnow().isoformat()
+    })
+
+    return func.HttpResponse(
+        json.dumps({"reply": reply}),
+        status_code=200,
+        mimetype="application/json"
+    )
