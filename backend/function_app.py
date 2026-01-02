@@ -1,13 +1,16 @@
 import azure.functions as func
 import datetime
 import json
-import os
-from cosmos_client import get_container
-from openai import OpenAI
 import logging
+from cosmos_client import get_container
 
-# OpenAI client
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+from openai import OpenAI
+
+# ✅ LM Studio local OpenAI-compatible client
+client = OpenAI(
+    base_url="http://127.0.0.1:1234/v1",
+    api_key="lm-studio"  
+)
 
 app = func.FunctionApp()
 
@@ -53,60 +56,65 @@ def enter(req: func.HttpRequest):
     )
 
 
-# ---------------- CHAT (REAL AI) ----------------
+# ---------------- CHAT ----------------
 @app.route(route="chat", methods=["POST"], auth_level=func.AuthLevel.ANONYMOUS)
 def chat(req: func.HttpRequest):
 
     try:
         data = req.get_json()
-    except ValueError:
-        return func.HttpResponse(
-            json.dumps({"error": "Invalid JSON"}),
-            status_code=400,
-            mimetype="application/json"
-        )
+        message = data.get("message")
 
-    message = data.get("message")
-
-    if not message:
-        return func.HttpResponse(
-            json.dumps({"error": "Message is required"}),
-            status_code=400,
-            mimetype="application/json"
-        )
-
-    # ✅ OpenAI Responses API (CORRECT)
-    try:
-            # Try OpenAI
-            response = client.responses.create(
-                model="gpt-4o-mini",
-                input=message
+        if not message:
+            return func.HttpResponse(
+                json.dumps({"reply": "Please type something so I can listen 🤍"}),
+                status_code=200,
+                mimetype="application/json"
             )
-            reply = response.output_text
 
-    except Exception as ai_error:
-        # 🔥 FALLBACK RESPONSE (VERY IMPORTANT)
-        logging.error(f"OpenAI failed: {ai_error}")
-        reply = (
-                "I'm here with you. You’re not alone 🤍\n"
-                "Tell me more about what you're feeling."
+        # ✅ CALL LOCAL LM STUDIO MODEL
+        response = client.chat.completions.create(
+            model="tinyllama-1.1b-chat-v1.0",
+            messages=[
+                {
+                    "role": "system",
+                    "content": (
+                        "You are MindBridge, a supportive mental health assistant for students. "
+                        "Be empathetic, calm, and encouraging. Do not give medical diagnoses."
+                    )
+                },
+                {"role": "user", "content": message}
+            ],
+            temperature=0.7,
+            max_tokens=200
         )
 
-    # ✅ CORRECT extraction
-    reply = response.output_text
+        reply = response.choices[0].message.content.strip()
 
-    chat_container = get_container("chat_summaries")
+        # ✅ SAVE CHAT
+        chat_container = get_container("chat_summaries")
+        chat_container.create_item({
+            "id": str(datetime.datetime.utcnow().timestamp()),
+            "studentId": "test-user",
+            "userMessage": message,
+            "botReply": reply,
+            "createdAt": datetime.datetime.utcnow().isoformat()
+        })
 
-    chat_container.create_item({
-        "id": str(datetime.datetime.utcnow().timestamp()),
-        "studentId": "test-user",
-        "userMessage": message,
-        "botReply": reply,
-        "createdAt": datetime.datetime.utcnow().isoformat()
-    })
+        return func.HttpResponse(
+            json.dumps({"reply": reply}),
+            status_code=200,
+            mimetype="application/json"
+        )
 
-    return func.HttpResponse(
-        json.dumps({"reply": reply}),
-        status_code=200,
-        mimetype="application/json"
-    )
+    except Exception as e:
+        logging.error(f"Chat error: {e}")
+        return func.HttpResponse(
+            json.dumps({
+                "reply": (
+                    "I'm here with you 🤍 "
+                    "Something went wrong, but you can try again."
+                )
+            }),
+            status_code=200,
+            mimetype="application/json"
+        )

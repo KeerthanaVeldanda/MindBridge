@@ -1,3 +1,4 @@
 azure-functions
 openai
 azure-cosmos
+requests
