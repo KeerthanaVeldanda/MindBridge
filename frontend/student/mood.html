@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mood</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+  <aside class="sidebar">
+    <a href="index.html">Home</a>
+    <a href="chat.html">Chat</a>
+    <a class="active">Mood</a>
+    <a href="calendar.html">Calendar</a>
+  </aside>
+
+  <main>
+    <h2>How are you feeling today?</h2>
+    <div class="moods">
+      <button onclick="saveMood('happy')">😊 Happy</button>
+      <button onclick="saveMood('okay')">😐 Okay</button>
+      <button onclick="saveMood('sad')">😔 Low</button>
+      <button onclick="saveMood('stressed')">🤯 Stressed</button>
+    </div>
+  </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

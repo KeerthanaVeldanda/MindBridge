@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>MindBridge – Counsellor Dashboard</title>
-  <link rel="stylesheet" href="dashboard.css" />
+  <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
 
@@ -11,50 +11,43 @@
 
   <!-- SIDEBAR -->
   <aside class="sidebar">
-    <h1 class="logo">MindBridge</h1>
-    <nav>
-      <a class="active">Dashboard</a>
-      <a>Students</a>
-      <a>Alerts</a>
-      <a>Reports</a>
-      <a>Settings</a>
-    </nav>
+    <h2 class="logo">MindBridge</h2>
+    <p class="role">Counsellor Panel</p>
+
+    <a class="active">Dashboard</a>
+    <a>Risk Alerts</a>
+    <a>Students</a>
+    <a>Reports</a>
   </aside>
 
   <!-- MAIN -->
   <main class="main">
 
-    <header class="header">
-      <h2>Counsellor Dashboard</h2>
-      <p class="subtitle">Early risk detection & wellbeing insights</p>
+    <header class="topbar">
+      <h1>Risk Monitoring</h1>
+      <span class="status">Live</span>
     </header>
 
-    <!-- KPI CARDS -->
-    <section class="kpis">
-      <div class="kpi">
-        <h4>Total Students</h4>
-        <p id="totalStudents">–</p>
+    <!-- STATS -->
+    <section class="stats">
+      <div class="stat-card high">
+        <h3>High Risk</h3>
+        <p id="highCount">0</p>
       </div>
-
-      <div class="kpi warning">
-        <h4>Stressed Today</h4>
-        <p id="stressedToday">–</p>
+      <div class="stat-card medium">
+        <h3>Medium Risk</h3>
+        <p id="mediumCount">0</p>
       </div>
-
-      <div class="kpi danger">
-        <h4>High-Risk Alerts</h4>
-        <p id="criticalAlerts">–</p>
-      </div>
-
-      <div class="kpi">
-        <h4>Avg Mood Score</h4>
-        <p id="avgMood">–</p>
+      <div class="stat-card low">
+        <h3>Low Risk</h3>
+        <p id="lowCount">0</p>
       </div>
     </section>
 
-    <!-- ALERTS -->
-    <section class="panel">
-      <h3>⚠️ Risk Alerts</h3>
+    <!-- ALERT TABLE -->
+    <section class="alerts">
+      <h2>Recent Alerts</h2>
+
       <table>
         <thead>
           <tr>
@@ -62,42 +55,18 @@
             <th>Risk Level</th>
             <th>Reason</th>
             <th>Detected At</th>
+            <th>Status</th>
           </tr>
         </thead>
-        <tbody id="alertTable"></tbody>
+        <tbody id="alertTable">
+          <!-- Filled by JS -->
+        </tbody>
       </table>
-    </section>
-
-    <!-- STUDENT OVERVIEW -->
-    <section class="panel">
-      <h3>Student Overview</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Student ID</th>
-            <th>Last Mood</th>
-            <th>Risk Level</th>
-            <th>Last Active</th>
-          </tr>
-        </thead>
-        <tbody id="studentTable"></tbody>
-      </table>
-    </section>
-
-    <!-- MOOD TRENDS -->
-    <section class="panel">
-      <h3>Weekly Mood Distribution</h3>
-      <div class="trend">
-        <div>😊 Happy: <span id="happyCount">–</span></div>
-        <div>😐 Okay: <span id="okayCount">–</span></div>
-        <div>😔 Low: <span id="sadCount">–</span></div>
-        <div>🤯 Stressed: <span id="stressedCount">–</span></div>
-      </div>
     </section>
 
   </main>
 </div>
 
-<script src="script.js"></script>
+<script src="dashboard.js"></script>
 </body>
 </html>

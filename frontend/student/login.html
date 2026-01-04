@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MindBridge – Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="center">
+
+<div class="login-card">
+  <h2>MindBridge 💜</h2>
+  <input id="name" placeholder="Your name">
+  <input id="email" placeholder="Email">
+  <input id="password" type="password" placeholder="Password">
+  <button onclick="login()">Enter Safe Space</button>
+</div>
+
+<script>
+function login() {
+  const studentName = name.value;
+  const email = emailInput = document.getElementById("email").value;
+  const password = passwordInput = document.getElementById("password").value;
+
+  fetch("http://127.0.0.1:7072/api/enter", {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({ studentName, email, password })
+  }).then(() => {
+    localStorage.setItem("studentId", email);
+    localStorage.setItem("studentName", studentName);
+    window.location.href = "index.html";
+  });
+}
+</script>
+</body>
+</html>

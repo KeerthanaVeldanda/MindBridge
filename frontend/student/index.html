@@ -1,93 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <title>MindBridge</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>MindBridge – Home</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- LOGIN -->
-<div class="login-overlay" id="loginOverlay">
-  <div class="login-card">
-    <h1>MindBridge</h1>
-    <p>Your safe space 🤍</p>
-
-    <input id="studentName" placeholder="Your name" />
-    <input id="email" placeholder="Email" />
-    <input id="password" type="password" placeholder="Password" />
-
-    <button onclick="login()">Enter</button>
-    <p class="error" id="loginError"></p>
-  </div>
-</div>
-
-<!-- APP -->
-<div class="app hidden" id="app">
-
-  <!-- SIDEBAR -->
+<div class="app">
   <aside class="sidebar">
-    <div class="logo">MindBridge</div>
-    <nav>
-      <a class="active" onclick="showSection('dashboard')">Dashboard</a>
-      <a onclick="showSection('chat')">Chat</a>
-      <a onclick="showSection('moods')">Moods</a>
-      <a onclick="showSection('calendar')">Calendar</a>
-    </nav>
+    <h2>MindBridge</h2>
+    <a class="active">Home</a>
+    <a href="chat.html">Chat</a>
+    <a href="moods.html">Mood</a>
+    <a href="calendar.html">Calendar</a>
   </aside>
 
-  <!-- MAIN -->
-  <main class="main">
-    <header class="header">
-      <h2 id="welcomeText"></h2>
-      <p class="subtitle">Take a moment. You’re doing your best.</p>
-    </header>
+  <main class="dashboard">
+    <h1>Hello, <span id="studentName"></span> 👋</h1>
+    <p class="subtitle">How are you feeling today?</p>
 
-    <!-- CHAT -->
-    <section id="chatSection" class="hidden">
-      <h3>Your Safe Chat</h3>
-      <div class="chat-card">
-        <div class="chatbox" id="chatBox"></div>
-        <div class="chat-input">
-          <input id="textInput" placeholder="Say it here… no judgment" />
-          <button onclick="sendMessage()">Send</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- MOODS -->
-    <section id="moodsSection" class="hidden">
-      <h3>Select Your Mood</h3>
-      <p class="hint">This helps us understand patterns over time.</p>
-      <div class="mood-grid">
-        <button class="mood calm" onclick="selectMood('happy')">😊 Calm</button>
-        <button class="mood okay" onclick="selectMood('okay')">😐 Okay</button>
-        <button class="mood low" onclick="selectMood('sad')">😔 Low</button>
-        <button class="mood stressed" onclick="selectMood('stressed')">🤯 Stressed</button>
-      </div>
-    </section>
-
-    <!-- CALENDAR -->
-    <section id="calendarSection" class="hidden">
-    <h3>Mood Calendar</h3>
-
-    <div class="calendar-header">
-    <button onclick="changeMonth(-1)">‹</button>
-    <span id="monthLabel"></span>
-    <button onclick="changeMonth(1)">›</button>
+    <div class="cards">
+      <div class="card"><h4>Stress Level</h4><p class="big">Low</p></div>
+      <div class="card"><h4>Focus</h4><p class="big">42 min</p></div>
+      <div class="card"><h4>Progress</h4><p class="big">65%</p></div>
     </div>
-
-    <div class="weekdays">
-    <span>Sun</span><span>Mon</span><span>Tue</span>
-    <span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
-    </div>
-
-    <div class="calendar" id="calendar"></div>
-
-    <p class="selected-mood" id="selectedDateMood"></p>
-    </section>
-
-
   </main>
 </div>
 
