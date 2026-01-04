@@ -1,25 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Calendar</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>MindBridge – Calendar</title>
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 
 <div class="app">
+
   <aside class="sidebar">
-    <a href="index.html">Home</a>
+    <div class="logo">🧠 MindBridge</div>
+    <a href="index.html">Dashboard</a>
     <a href="chat.html">Chat</a>
-    <a href="moods.html">Mood</a>
-    <a class="active">Calendar</a>
+    <a href="mood.html">Mood</a>
+    <a class="active" href="calendar.html">Calendar</a>
   </aside>
 
-  <main>
-    <h2>Mood Calendar</h2>
-    <div id="calendar" class="calendar"></div>
+  <main class="main">
+
+    <div class="card">
+      <h2>Mood Calendar 📅</h2>
+      <p>Track how you’ve been feeling</p>
+    </div>
+
+    <div class="card">
+      <div id="calendar" class="calendar"></div>
+    </div>
+
   </main>
 </div>
 
-<script src="script.js"></script>
+<script src="./script.js"></script>
 </body>
 </html>

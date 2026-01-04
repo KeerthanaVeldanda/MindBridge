@@ -1,30 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Mood</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>MindBridge – Mood</title>
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 
 <div class="app">
+
   <aside class="sidebar">
-    <a href="index.html">Home</a>
+    <div class="logo">🧠 MindBridge</div>
+    <a href="index.html">Dashboard</a>
     <a href="chat.html">Chat</a>
-    <a class="active">Mood</a>
+    <a class="active" href="mood.html">Mood</a>
     <a href="calendar.html">Calendar</a>
   </aside>
 
-  <main>
-    <h2>How are you feeling today?</h2>
-    <div class="moods">
-      <button onclick="saveMood('happy')">😊 Happy</button>
-      <button onclick="saveMood('okay')">😐 Okay</button>
-      <button onclick="saveMood('sad')">😔 Low</button>
-      <button onclick="saveMood('stressed')">🤯 Stressed</button>
+  <main class="main">
+
+    <div class="card">
+      <h2>How are you feeling today?</h2>
     </div>
+
+    <div class="grid">
+      <div class="card mood-card" onclick="setMood('happy')">😊 Happy</div>
+      <div class="card mood-card" onclick="setMood('okay')">🙂 Okay</div>
+      <div class="card mood-card" onclick="setMood('low')">😔 Low</div>
+      <div class="card mood-card" onclick="setMood('stressed')">🤯 Stressed</div>
+    </div>
+
+    <div id="status" class="status-card"></div>
+
   </main>
 </div>
 
-<script src="script.js"></script>
+<script src="./script.js"></script>
 </body>
 </html>

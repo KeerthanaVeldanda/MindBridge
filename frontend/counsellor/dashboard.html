@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>MindBridge – Counsellor Dashboard</title>
+  <title>MindBridge – Dashboard</title>
   <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
@@ -12,57 +12,60 @@
   <!-- SIDEBAR -->
   <aside class="sidebar">
     <h2 class="logo">MindBridge</h2>
-    <p class="role">Counsellor Panel</p>
-
-    <a class="active">Dashboard</a>
-    <a>Risk Alerts</a>
-    <a>Students</a>
-    <a>Reports</a>
+    <a class="active" href="index.html">Dashboard</a>
+    <a href="chat.html">Chat</a>
+    <a href="mood.html">Mood</a>
+    <a href="calendar.html">Calendar</a>
   </aside>
 
   <!-- MAIN -->
   <main class="main">
 
-    <header class="topbar">
-      <h1>Risk Monitoring</h1>
-      <span class="status">Live</span>
-    </header>
+    <!-- GREETING -->
+    <div class="card hero">
+      <h2>Hello 👋</h2>
+      <p class="sub">This is your safe space today</p>
+    </div>
 
     <!-- STATS -->
-    <section class="stats">
-      <div class="stat-card high">
-        <h3>High Risk</h3>
-        <p id="highCount">0</p>
-      </div>
-      <div class="stat-card medium">
-        <h3>Medium Risk</h3>
-        <p id="mediumCount">0</p>
-      </div>
-      <div class="stat-card low">
-        <h3>Low Risk</h3>
-        <p id="lowCount">0</p>
-      </div>
-    </section>
+    <div class="grid">
 
-    <!-- ALERT TABLE -->
-    <section class="alerts">
-      <h2>Recent Alerts</h2>
+      <div class="card stat">
+        <h4>Today’s Mood</h4>
+        <p id="todayMood" class="big">—</p>
+      </div>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Student ID</th>
-            <th>Risk Level</th>
-            <th>Reason</th>
-            <th>Detected At</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody id="alertTable">
-          <!-- Filled by JS -->
-        </tbody>
-      </table>
-    </section>
+      <div class="card stat">
+        <h4>Weekly Check-ins</h4>
+        <p class="big">4 / 7</p>
+      </div>
+
+      <div class="card stat">
+        <h4>Stress Level</h4>
+        <p class="big calm">Low</p>
+      </div>
+
+    </div>
+
+    <!-- QUICK ACTIONS -->
+    <div class="card">
+      <h3>Quick Actions</h3>
+      <div class="actions">
+        <button onclick="location.href='chat.html'">💬 Talk Now</button>
+        <button onclick="location.href='mood.html'">😊 Add Mood</button>
+        <button onclick="location.href='calendar.html'">📅 View Calendar</button>
+      </div>
+    </div>
+
+    <!-- INSIGHTS -->
+    <div class="card">
+      <h3>Your Insights</h3>
+      <ul class="insights">
+        <li>✔ You’ve checked in 4 times this week</li>
+        <li>✔ Your mood trend is stable</li>
+        <li>✔ No high-risk alerts detected</li>
+      </ul>
+    </div>
 
   </main>
 </div>

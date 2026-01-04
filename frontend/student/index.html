@@ -1,32 +1,71 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>MindBridge – Home</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>MindBridge – Dashboard</title>
+
+  <!-- IMPORTANT: correct CSS link -->
+  <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
 
 <div class="app">
+
+  <!-- SIDEBAR -->
   <aside class="sidebar">
-    <h2>MindBridge</h2>
-    <a class="active">Home</a>
+    <div class="logo">🧠 MindBridge</div>
+    <a class="active" href="index.html">Dashboard</a>
     <a href="chat.html">Chat</a>
-    <a href="moods.html">Mood</a>
+    <a href="mood.html">Mood</a>
     <a href="calendar.html">Calendar</a>
   </aside>
 
-  <main class="dashboard">
-    <h1>Hello, <span id="studentName"></span> 👋</h1>
-    <p class="subtitle">How are you feeling today?</p>
+  <!-- MAIN -->
+  <main class="main">
 
-    <div class="cards">
-      <div class="card"><h4>Stress Level</h4><p class="big">Low</p></div>
-      <div class="card"><h4>Focus</h4><p class="big">42 min</p></div>
-      <div class="card"><h4>Progress</h4><p class="big">65%</p></div>
+    <!-- HERO -->
+    <div class="hero">
+      <h1>Hello 👋</h1>
+      <p class="subtitle">How are you feeling today?</p>
     </div>
+
+    <!-- MOOD GRID -->
+    <div class="grid">
+
+      <div class="card mood-card" onclick="setMood('happy')">
+        <span class="emoji">😊</span>
+        <h3>Happy</h3>
+        <p>Feeling good & positive</p>
+      </div>
+
+      <div class="card mood-card" onclick="setMood('okay')">
+        <span class="emoji">🙂</span>
+        <h3>Okay</h3>
+        <p>Neutral or balanced</p>
+      </div>
+
+      <div class="card mood-card" onclick="setMood('low')">
+        <span class="emoji">😔</span>
+        <h3>Low</h3>
+        <p>Feeling down</p>
+      </div>
+
+      <div class="card mood-card" onclick="setMood('stressed')">
+        <span class="emoji">🤯</span>
+        <h3>Stressed</h3>
+        <p>Overwhelmed or anxious</p>
+      </div>
+
+    </div>
+
+    <!-- STATUS -->
+    <div id="status" class="status-card">
+      Your mood will be saved securely 💜
+    </div>
+
   </main>
 </div>
 
-<script src="script.js"></script>
+<script src="./script.js"></script>
 </body>
 </html>

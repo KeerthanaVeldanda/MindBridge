@@ -1,30 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>MindBridge – Chat</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 
 <div class="app">
+
+  <!-- SIDEBAR -->
   <aside class="sidebar">
-    <a href="index.html">Home</a>
-    <a class="active">Chat</a>
-    <a href="moods.html">Mood</a>
+    <div class="logo">🧠 MindBridge</div>
+    <a href="index.html">Dashboard</a>
+    <a class="active" href="chat.html">Chat</a>
+    <a href="mood.html">Mood</a>
     <a href="calendar.html">Calendar</a>
   </aside>
 
-  <main>
-    <h2>Your Safe Space 💜</h2>
-    <div id="chatBox" class="chatbox"></div>
+  <!-- MAIN -->
+  <main class="main">
 
-    <div class="chat-input">
-      <input id="textInput" placeholder="Say it here… no judgement">
-      <button onclick="sendMessage()">Send</button>
+    <div class="card">
+      <h2>Your Safe Chat 💬</h2>
+      <p>Say anything. No judgment.</p>
     </div>
+
+    <div class="card chat-card">
+      <div id="chatBox" class="chatbox"></div>
+
+      <div class="chat-input">
+        <input id="textInput" type="text" placeholder="Say it here…" />
+        <button onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+
   </main>
 </div>
 
-<script src="script.js"></script>
+<script src="./script.js"></script>
 </body>
 </html>

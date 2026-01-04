@@ -1,26 +1,35 @@
 const API = "http://127.0.0.1:7072/api";
-const studentId = localStorage.getItem("studentId");
-document.getElementById("studentName")?.innerText =
-  localStorage.getItem("studentName");
+const studentId = localStorage.studentId;
 
-function sendMessage() {
-  const msg = textInput.value;
-  textInput.value = "";
-  chatBox.innerHTML += `<div class="message user">${msg}</div>`;
-
-  fetch(`${API}/chat`, {
+/* CHAT */
+async function send(){
+  chat.innerHTML += `<p><b>You:</b> ${msg.value}</p>`;
+  const r = await fetch(API+"/chat",{
     method:"POST",
-    headers:{ "Content-Type":"application/json" },
-    body:JSON.stringify({ studentId, message: msg })
-  }).then(r=>r.json()).then(d=>{
-    chatBox.innerHTML += `<div class="message bot">${d.reply}</div>`;
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({studentId,message:msg.value})
   });
+  const d = await r.json();
+  chat.innerHTML += `<p><b>MindBridge:</b> ${d.reply}</p>`;
+  msg.value="";
 }
 
-function saveMood(mood) {
-  fetch(`${API}/mood`, {
+/* MOOD */
+async function setMood(mood){
+  await fetch(API+"/mood",{
     method:"POST",
-    headers:{ "Content-Type":"application/json" },
-    body:JSON.stringify({ studentId, mood })
-  }).then(()=>alert("Mood saved 💜"));
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({studentId,mood})
+  });
+  if(status) status.innerText="Mood saved 💜";
 }
+
+/* CALENDAR */
+async function loadCalendar(){
+  const r = await fetch(API+"/moods?studentId="+studentId);
+  const d = await r.json();
+  calendar.innerHTML = d.map(m =>
+    `<p>${m.date} – ${m.mood}</p>`
+  ).join("");
+}
+if(typeof calendar!=="undefined") loadCalendar();
