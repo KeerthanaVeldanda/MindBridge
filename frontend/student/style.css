@@ -182,3 +182,127 @@ button:hover {
   display: flex;
   gap: 10px;
 }
+/* ===== CALENDAR ===== */
+
+.calendar-card {
+  max-width: 900px;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.calendar-header button {
+  background: #7b5cff;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  font-size: 18px;
+}
+
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 10px;
+  font-weight: 600;
+  opacity: 0.7;
+  text-align: center;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 12px;
+}
+
+.day {
+  height: 80px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 16px;
+  padding: 8px;
+  cursor: pointer;
+  position: relative;
+  transition: 0.2s;
+}
+
+.day:hover {
+  transform: translateY(-3px);
+}
+
+.day.empty {
+  background: transparent;
+  cursor: default;
+}
+
+.day.today {
+  border: 2px solid #7b5cff;
+}
+
+.day-number {
+  font-weight: 600;
+}
+
+.mood-dot {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 18px;
+}
+
+.calendar-hint {
+  margin-top: 14px;
+  opacity: 0.6;
+}
+/* =========================
+   MOOD SELECTION FEEDBACK
+========================= */
+
+/* Active (selected) mood */
+.mood-card.active {
+  border: 2px solid #7b5cff;
+  background: #efeaff;
+  box-shadow: 0 18px 42px rgba(123, 92, 255, 0.25);
+}
+
+/* Saving / success / error states */
+.status-card {
+  display: none;
+  margin-top: 32px;
+  padding: 16px 20px;
+  border-radius: 16px;
+  font-weight: 500;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Show status */
+.status-card.show {
+  display: block;
+}
+
+/* Success */
+.status-card.success {
+  background: #eef3ff;
+  color: #5b4dd8;
+}
+
+/* Error */
+.status-card.error {
+  background: #ffecec;
+  color: #c62828;
+}
+
+/* Subtle animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

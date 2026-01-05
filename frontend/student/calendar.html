@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>MindBridge – Calendar</title>
-  <link rel="stylesheet" href="./style.css">
+  <meta charset="UTF-8" />
+  <title>MindBridge – Mood Calendar</title>
+  <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
 
 <div class="app">
 
+  <!-- SIDEBAR -->
   <aside class="sidebar">
     <div class="logo">🧠 MindBridge</div>
     <a href="index.html">Dashboard</a>
@@ -17,20 +18,29 @@
     <a class="active" href="calendar.html">Calendar</a>
   </aside>
 
+  <!-- MAIN -->
   <main class="main">
 
-    <div class="card">
-      <h2>Mood Calendar 📅</h2>
-      <p>Track how you’ve been feeling</p>
-    </div>
+    <div class="card calendar-card">
+      <div class="calendar-header">
+        <button onclick="changeMonth(-1)">‹</button>
+        <h2 id="monthYear"></h2>
+        <button onclick="changeMonth(1)">›</button>
+      </div>
 
-    <div class="card">
-      <div id="calendar" class="calendar"></div>
+      <div class="weekdays">
+        <span>Sun</span><span>Mon</span><span>Tue</span>
+        <span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+      </div>
+
+      <div id="calendarGrid" class="calendar-grid"></div>
+
+      <p class="calendar-hint">Tap a date to see your mood</p>
     </div>
 
   </main>
 </div>
 
-<script src="./script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

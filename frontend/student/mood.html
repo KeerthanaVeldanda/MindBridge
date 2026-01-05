@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>MindBridge – Mood</title>
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
 
 <div class="app">
 
+  <!-- SIDEBAR -->
   <aside class="sidebar">
     <div class="logo">🧠 MindBridge</div>
     <a href="index.html">Dashboard</a>
@@ -17,17 +18,38 @@
     <a href="calendar.html">Calendar</a>
   </aside>
 
+  <!-- MAIN -->
   <main class="main">
 
-    <div class="card">
+    <div class="card hero">
       <h2>How are you feeling today?</h2>
+      <p class="subtitle">Tap one mood to save it</p>
     </div>
 
     <div class="grid">
-      <div class="card mood-card" onclick="setMood('happy')">😊 Happy</div>
-      <div class="card mood-card" onclick="setMood('okay')">🙂 Okay</div>
-      <div class="card mood-card" onclick="setMood('low')">😔 Low</div>
-      <div class="card mood-card" onclick="setMood('stressed')">🤯 Stressed</div>
+      <div class="card mood-card" data-mood="happy" onclick="setMoodUI(this,'happy')">
+        <span class="emoji">😊</span>
+        <h3>Happy</h3>
+        <p>Feeling good & positive</p>
+      </div>
+
+      <div class="card mood-card" data-mood="okay" onclick="setMoodUI(this,'okay')">
+        <span class="emoji">🙂</span>
+        <h3>Okay</h3>
+        <p>Neutral or balanced</p>
+      </div>
+
+      <div class="card mood-card" data-mood="low" onclick="setMoodUI(this,'low')">
+        <span class="emoji">😔</span>
+        <h3>Low</h3>
+        <p>Feeling down</p>
+      </div>
+
+      <div class="card mood-card" data-mood="stressed" onclick="setMoodUI(this,'stressed')">
+        <span class="emoji">🤯</span>
+        <h3>Stressed</h3>
+        <p>Overwhelmed or anxious</p>
+      </div>
     </div>
 
     <div id="status" class="status-card"></div>
