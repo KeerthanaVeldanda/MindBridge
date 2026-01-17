@@ -1,71 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <title>MindBridge – Dashboard</title>
-
-  <!-- IMPORTANT: correct CSS link -->
-  <link rel="stylesheet" href="./style.css" />
+  <title>MindBridge | Dashboard</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="app">
-
-  <!-- SIDEBAR -->
+<div class="layout">
   <aside class="sidebar">
-    <div class="logo">🧠 MindBridge</div>
-    <a class="active" href="index.html">Dashboard</a>
-    <a href="chat.html">Chat</a>
-    <a href="mood.html">Mood</a>
-    <a href="calendar.html">Calendar</a>
+    <h2>🧠 MindBridge</h2>
+
+    <nav>
+      <a class="active" href="index.html">Dashboard</a>
+      <a href="chat.html">AI Support Chat</a>
+      <a href="mood.html">Mood History</a>
+    </nav>
+
+    <button class="logout" onclick="logout()">Sign Out</button>
   </aside>
 
-  <!-- MAIN -->
-  <main class="main">
+  <main class="content">
+    <h1 id="greet"></h1>
+    <p>How are you feeling right now?</p>
 
-    <!-- HERO -->
-    <div class="hero">
-      <h1>Hello 👋</h1>
-      <p class="subtitle">How are you feeling today?</p>
+    <div class="card">
+      <h3>Daily Check-in</h3>
+
+      <div class="moods">
+        <button onclick="logMood('Happy')">😊 Happy</button>
+        <button onclick="logMood('Neutral')">😐 Neutral</button>
+        <button onclick="logMood('Sad')">😔 Sad</button>
+        <button onclick="logMood('Anxious')">😟 Anxious</button>
+        <button onclick="logMood('Angry')">😡 Angry</button>
+      </div>
+
+      <textarea id="note" placeholder="What's on your mind?"></textarea>
+      <button onclick="saveMood()">Log Mood</button>
     </div>
-
-    <!-- MOOD GRID -->
-    <div class="grid">
-
-      <div class="card mood-card" onclick="setMood('happy')">
-        <span class="emoji">😊</span>
-        <h3>Happy</h3>
-        <p>Feeling good & positive</p>
-      </div>
-
-      <div class="card mood-card" onclick="setMood('okay')">
-        <span class="emoji">🙂</span>
-        <h3>Okay</h3>
-        <p>Neutral or balanced</p>
-      </div>
-
-      <div class="card mood-card" onclick="setMood('low')">
-        <span class="emoji">😔</span>
-        <h3>Low</h3>
-        <p>Feeling down</p>
-      </div>
-
-      <div class="card mood-card" onclick="setMood('stressed')">
-        <span class="emoji">🤯</span>
-        <h3>Stressed</h3>
-        <p>Overwhelmed or anxious</p>
-      </div>
-
-    </div>
-
-    <!-- STATUS -->
-    <div id="status" class="status-card">
-      Your mood will be saved securely 💜
-    </div>
-
   </main>
 </div>
 
-<script src="./script.js"></script>
+<script src="app.js"></script>
 </body>
 </html>

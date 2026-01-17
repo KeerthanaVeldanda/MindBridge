@@ -3,10 +3,11 @@ import datetime, json, hashlib
 from datetime import timedelta
 from cosmos_client import get_container
 from openai import OpenAI
+import os
 
 client = OpenAI(
-    base_url="http://127.0.0.1:1234/v1",
-    api_key="lm-studio"
+    api_key=os.environ.get("GROQ_API_KEY"),
+    base_url="https://api.groq.com/openai/v1",
 )
 app = func.FunctionApp()
 RISK_WORDS = ["suicide","kill myself","end my life","hopeless","worthless","self harm"]
@@ -36,41 +37,72 @@ def login(req: func.HttpRequest):
         return func.HttpResponse(status_code=401)
     return func.HttpResponse(json.dumps(u))
 
+import re
+
 # ---------- CHAT ----------
 @app.route(route="chat", methods=["POST"], auth_level=func.AuthLevel.ANONYMOUS)
 def chat(req: func.HttpRequest):
     d = req.get_json()
-    msg = d["message"]
-    sid = d["studentId"]
+    msg = d.get("message")
+    sid = d.get("studentId")
 
-    risk = any(w in msg.lower() for w in RISK_WORDS)
+    if not msg or not sid:
+        return func.HttpResponse(
+            json.dumps({"error": "Invalid request"}),
+            status_code=400,
+            mimetype="application/json"
+        )
 
-    reply = client.chat.completions.create(
-        model="tinyllama-1.1b-chat-v1.0",
-        messages=[
-            {"role":"system","content":"You are a calm emotional support friend. Short replies only."},
-            {"role":"user","content":msg}
+    # Improved risk detection
+    risk = any(
+        re.search(rf"\b{re.escape(word)}\b", msg.lower())
+        for word in RISK_WORDS
+    )
+
+    # MindBridge AI response
+    response = client.responses.create(
+        model="llama-3.1-8b-instant",
+        input=[
+            {
+                "role": "system",
+                "content": (
+                    "You are MindBridge, a friendly AI mental wellness assistant for students. "
+                    "Be supportive, calm, positive, and concise. "
+                    "If the user sounds stressed or anxious, respond with empathy and encouragement. "
+                    "Never give medical advice."
+                )
+            },
+            {"role": "user", "content": msg}
         ],
-        temperature=0.3
-    ).choices[0].message.content
+        temperature=0.4
+    )
 
+    reply = response.output[0].content[0].text
+
+    # Store chat
     get_container("chat_summaries").create_item({
         "id": str(datetime.datetime.utcnow().timestamp()),
         "studentId": sid,
         "userMessage": msg,
         "botReply": reply,
-        "risk": risk
+        "risk": risk,
+        "time": datetime.datetime.utcnow().isoformat()
     })
 
+    # Store alert if risky
     if risk:
         get_container("risk_alerts").create_item({
             "id": str(datetime.datetime.utcnow().timestamp()),
             "studentId": sid,
             "level": "HIGH",
+            "message": msg,
             "time": datetime.datetime.utcnow().isoformat()
         })
 
-    return func.HttpResponse(json.dumps({"reply": reply}))
+    return func.HttpResponse(
+        json.dumps({"reply": reply, "risk": risk}),
+        mimetype="application/json"
+    )
 
 # ---------- MOOD ----------
 @app.route(route="mood", methods=["POST"], auth_level=func.AuthLevel.ANONYMOUS)

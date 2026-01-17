@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MindBridge</title>
+  <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+
+<div class="auth-layout">
+  <div class="left-card">
+    <div class="logo">🧠</div>
+    <h1>MindBridge</h1>
+    <p>Your safe space for mental wellness. Connect with AI support, track your moods, and find balance in your daily life.</p>
+  </div>
+
+  <div class="right-card">
+    <h2>Welcome</h2>
+    <p class="sub">Sign in to your account or create a new one</p>
+
+    <div class="tabs">
+      <button class="active" onclick="showLogin()">Login</button>
+      <button onclick="showRegister()">Register</button>
+    </div>
+
+    <div id="login">
+      <label>Email</label>
+      <input id="loginEmail">
+      <label>Password</label>
+      <input type="password" id="loginPassword">
+      <button class="primary" onclick="login()">Sign In</button>
+    </div>
+
+    <div id="register" class="hidden">
+      <label>Full Name</label>
+      <input id="name">
+      <label>Email</label>
+      <input id="email">
+      <label>Password</label>
+      <input type="password" id="password">
+      <label>I am a...</label>
+      <select id="role">
+        <option>Student</option>
+        <option>Counsellor</option>
+      </select>
+      <button class="primary">Create Account</button>
+    </div>
+  </div>
+</div>
+
+<script src="auth.js"></script>
+</body>
+</html>
