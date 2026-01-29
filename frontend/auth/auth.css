@@ -1,63 +1,31 @@
-body {
-  margin: 0;
-  font-family: "Segoe UI", sans-serif;
-  background: linear-gradient(#eef6f9, #f7fbfd);
+body{
+  margin:0;
+  font-family:Segoe UI;
+  background:#eef6f9;
 }
-
-.auth-layout {
-  width: 1000px;
-  height: 560px;
-  margin: 5% auto;
-  display: flex;
-  background: white;
-  border-radius: 22px;
-  box-shadow: 0 30px 60px rgba(0,0,0,.12);
+.wrapper{
+  display:flex;
+  width:1000px;
+  margin:5% auto;
+  background:white;
+  border-radius:20px;
 }
-
-.left-card {
-  width: 45%;
-  padding: 50px;
-  background: #f3fbfe;
-  border-radius: 22px 0 0 22px;
+.left{
+  width:45%;
+  padding:50px;
+  background:#f3fbfe;
 }
-
-.logo {
-  font-size: 50px;
-  color: #00a8c6;
+.right{
+  width:55%;
+  padding:40px;
 }
-
-.right-card {
-  width: 55%;
-  padding: 40px;
+.tabs button{
+  width:50%;
+  padding:10px;
+  border:none;
 }
-
-.tabs button {
-  width: 50%;
-  padding: 10px;
-  border: none;
-  background: #f2f2f2;
-}
-
-.tabs .active {
-  background: #00a8c6;
-  color: white;
-}
-
-input, select {
-  width: 100%;
-  padding: 12px;
-  margin: 8px 0;
-  border-radius: 12px;
-  border: 1px solid #ddd;
-}
-
-.primary {
-  width: 100%;
-  padding: 14px;
-  background: #00a8c6;
-  color: white;
-  border: none;
-  border-radius: 14px;
-}
-
-.hidden { display: none; }
+.tabs .active{background:#00a8c6;color:white;}
+input,select{width:100%;padding:12px;margin:8px 0;border-radius:10px;}
+button{width:100%;padding:14px;background:#00a8c6;color:white;border:none;border-radius:12px;}
+.hidden{display:none;}
+.logo{width:80px;}

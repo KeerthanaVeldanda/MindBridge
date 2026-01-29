@@ -1,32 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>MindBridge | Chat</title>
-  <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="student.css">
 </head>
 <body>
-
 <div class="layout">
-  <aside class="sidebar">
-    <h2>🧠 MindBridge</h2>
-    <nav>
-      <a href="index.html">Dashboard</a>
-      <a class="active">AI Support Chat</a>
-      <a href="mood.html">Mood History</a>
-    </nav>
-    <button class="logout" onclick="logout()">Sign Out</button>
-  </aside>
+<aside>
+<nav>
+<a href="dashboard.html">Dashboard</a>
+<a class="active">AI Support Chat</a>
+<a href="mood.html">Mood History</a>
+</nav>
+<button onclick="logout()">Sign Out</button>
+</aside>
 
-  <main class="content chat">
-    <div id="messages"></div>
-
-    <div class="input">
-      <input id="msg" placeholder="Type your message">
-      <button onclick="send()">➤</button>
-    </div>
-  </main>
+<main class="chat">
+<div class="chatbox">This is the start of your conversation. Say hello!</div>
+<div class="input"><input placeholder="Type your message"><button>➤</button></div>
+</main>
 </div>
-
-<script src="app.js"></script>
+<script src="student.js"></script>
 </body>
 </html>

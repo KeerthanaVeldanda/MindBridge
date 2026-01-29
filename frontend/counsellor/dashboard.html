@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="counsellor.css">
+<title>Counsellor Dashboard</title>
+</head>
+<body>
+
+<div class="layout">
+<aside>
+<h2>MindBridge</h2>
+<div class="nav active">Risk Alerts</div>
+<div class="user">SIGNED IN AS<br><b>Keerthana</b></div>
+<button onclick="logout()">Sign Out</button>
+</aside>
+
+<main>
+<h1>Counsellor Dashboard</h1>
+<p>Monitor and manage student risk alerts in real-time.</p>
+
+<div class="stats">
+<div class="orange">Pending High Risk <h2>1</h2></div>
+<div class="blue">Total Active Alerts <h2>1</h2></div>
+<div class="green">Resolved Today <h2>0</h2></div>
+</div>
+
+<h3>Active Risk Alerts</h3>
+<div class="alert">
+<span class="badge">HIGH RISK</span>
+<p>User ID: 1 • Jan 15, 4:44 PM</p>
+<p>"I am feeling really anxious about my upcoming exams."</p>
+<button>Mark Resolved</button>
+</div>
+</main>
+</div>
+
+<script src="counsellor.js"></script>
+</body>
+</html>

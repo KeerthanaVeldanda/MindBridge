@@ -6,43 +6,39 @@
 </head>
 <body>
 
-<div class="auth-layout">
-  <div class="left-card">
-    <div class="logo">🧠</div>
+<div class="wrapper">
+  <div class="left">
+    <img src="../assets/logo.png" class="logo">
     <h1>MindBridge</h1>
     <p>Your safe space for mental wellness. Connect with AI support, track your moods, and find balance in your daily life.</p>
   </div>
 
-  <div class="right-card">
+  <div class="right">
     <h2>Welcome</h2>
-    <p class="sub">Sign in to your account or create a new one</p>
+    <p>Sign in to your account or create a new one</p>
 
     <div class="tabs">
-      <button class="active" onclick="showLogin()">Login</button>
-      <button onclick="showRegister()">Register</button>
+      <button onclick="showLogin()" id="lTab" class="active">Login</button>
+      <button onclick="showRegister()" id="rTab">Register</button>
     </div>
 
-    <div id="login">
-      <label>Email</label>
-      <input id="loginEmail">
-      <label>Password</label>
-      <input type="password" id="loginPassword">
-      <button class="primary" onclick="login()">Sign In</button>
-    </div>
-
-    <div id="register" class="hidden">
-      <label>Full Name</label>
-      <input id="name">
+    <div id="loginBox">
       <label>Email</label>
       <input id="email">
       <label>Password</label>
       <input type="password" id="password">
-      <label>I am a...</label>
-      <select id="role">
+      <button onclick="login()">Sign In</button>
+    </div>
+
+    <div id="registerBox" class="hidden">
+      <input placeholder="Full Name">
+      <input placeholder="Email">
+      <input placeholder="Password" type="password">
+      <select>
         <option>Student</option>
         <option>Counsellor</option>
       </select>
-      <button class="primary">Create Account</button>
+      <button>Create Account</button>
     </div>
   </div>
 </div>

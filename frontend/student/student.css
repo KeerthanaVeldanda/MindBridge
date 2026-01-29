@@ -1,26 +1,12 @@
-body { margin:0; font-family:Segoe UI; background:#f7f9fc; }
-.layout { display:flex; height:100vh; }
-
-.sidebar {
-  width:260px; background:white; padding:20px;
-  box-shadow:2px 0 15px rgba(0,0,0,.05);
-}
-
-.sidebar nav a {
-  display:block; padding:12px; margin:6px 0;
-  border-radius:12px; text-decoration:none;
-}
-
-.sidebar nav .active { background:#e6f7ff; }
-
-.content { padding:40px; flex:1; }
-
-.card, .support, .recent {
-  background:white; padding:20px; border-radius:16px;
-  margin-bottom:20px;
-}
-
-.moods div {
-  display:inline-block; padding:12px; margin:6px;
-  background:#f3f6fb; border-radius:14px;
-}
+body{margin:0;font-family:Segoe UI;background:#f7f9fc;}
+.layout{display:flex;height:100vh;}
+aside{width:240px;background:white;padding:20px;}
+aside nav a{display:block;padding:12px;margin:6px 0;border-radius:12px;}
+aside .active{background:#e6f7ff;}
+main{flex:1;padding:40px;}
+.card,.support,.recent{background:white;padding:20px;border-radius:16px;margin-bottom:20px;}
+.moods div{display:inline-block;background:#f3f6fb;padding:12px;margin:6px;border-radius:12px;}
+.chatbox{background:white;padding:20px;border-radius:16px;height:300px;}
+.input{display:flex;margin-top:10px;}
+.input input{flex:1;padding:12px;border-radius:12px;}
+.input button{width:60px;}
