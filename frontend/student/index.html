@@ -16,6 +16,7 @@
       <a href="mood.html">Mood History</a>
     </nav>
 
+    <div class="user-info" id="userLabel"></div>
     <button class="logout" onclick="logout()">Sign Out</button>
   </aside>
 
@@ -27,11 +28,11 @@
       <h3>Daily Check-in</h3>
 
       <div class="moods">
-        <button onclick="logMood('Happy')">😊 Happy</button>
-        <button onclick="logMood('Neutral')">😐 Neutral</button>
-        <button onclick="logMood('Sad')">😔 Sad</button>
-        <button onclick="logMood('Anxious')">😟 Anxious</button>
-        <button onclick="logMood('Angry')">😡 Angry</button>
+        <button onclick="logMood('Happy', this)">😊 Happy</button>
+        <button onclick="logMood('Neutral', this)">😐 Neutral</button>
+        <button onclick="logMood('Sad', this)">😔 Sad</button>
+        <button onclick="logMood('Anxious', this)">😟 Anxious</button>
+        <button onclick="logMood('Angry', this)">😡 Angry</button>
       </div>
 
       <textarea id="note" placeholder="What's on your mind?"></textarea>
@@ -40,6 +41,6 @@
   </main>
 </div>
 
-<script src="app.js"></script>
+<script src="student.js"></script>
 </body>
 </html>

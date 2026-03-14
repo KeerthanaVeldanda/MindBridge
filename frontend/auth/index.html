@@ -31,14 +31,14 @@
     </div>
 
     <div id="registerBox" class="hidden">
-      <input placeholder="Full Name">
-      <input placeholder="Email">
-      <input placeholder="Password" type="password">
-      <select>
-        <option>Student</option>
-        <option>Counsellor</option>
+      <input id="regName" placeholder="Full Name">
+      <input id="regEmail" placeholder="Email">
+      <input id="regPassword" placeholder="Password" type="password">
+      <select id="regRole">
+        <option value="student">Student</option>
+        <option value="counsellor">Counsellor</option>
       </select>
-      <button>Create Account</button>
+      <button onclick="register()">Create Account</button>
     </div>
   </div>
 </div>

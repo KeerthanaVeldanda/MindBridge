@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html>
-<head><link rel="stylesheet" href="student.css"></head>
+<head><title>MindBridge | Mood History</title><link rel="stylesheet" href="student.css"></head>
 <body>
 <div class="layout">
 <aside>
+<h2>🧠 MindBridge</h2>
 <nav>
-<a href="dashboard.html">Dashboard</a>
+<a href="index.html">Dashboard</a>
 <a href="chat.html">AI Support Chat</a>
 <a class="active">Mood History</a>
 </nav>
+<div class="user-info" id="userLabel"></div>
 <button onclick="logout()">Sign Out</button>
 </aside>
 <main>
 <h1>Mood History</h1>
-<div class="recent">Neutral — Jan 15, 2026</div>
+<div id="moodList"><p>Loading...</p></div>
 </main>
 </div>
 <script src="student.js"></script>
